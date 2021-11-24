@@ -1,0 +1,30 @@
+{% extends 'firstapp/base.html' %}
+
+{% block title %}
+    <title>Posts Display</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for post in posts_objs %}
+          {# note that the list of posts are in the page_obj.object_list not page_obj #}
+            <h1 style="color:crimson;">{{post.title}}</h1>
+            <small>{{post.author}}</small>
+
+            <p>{{post.content}}</p>
+
+            <hr/>
+         {% endfor %}
+    </div>
+    <center>
+        {%if page_obj.has_previous %} {# whether the previous page exists #}
+            <a href="?page={{page_obj.previous_page_number}}"><</a> {# link to the prev page #}
+        {% endif %}
+        <span>{{page_obj.number}}</span> {# the current page number #}
+
+        {%if page_obj.has_next %} {# whether the next page exists #}
+            <a href="?page={{page_obj.next_page_number}}">></a> {# link to the next page #}
+        {% endif %}
+    </center>
+
+{% endblock %}
